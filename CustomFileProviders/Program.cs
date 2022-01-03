@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 // 
 
 builder.Services.AddDbContext<AppDbContext>();
+
 IMvcBuilder mvcBuilder = builder.Services.AddControllersWithViews();
 
 {   // Register DatabaseFileProvider
@@ -34,6 +35,8 @@ IMvcBuilder mvcBuilder = builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
+await DataGenerator.Generate(app.Services);
+
 app.UseDeveloperExceptionPage();
 
 app.UseRouting();
@@ -47,7 +50,12 @@ app.Run();
 
 /*
  
- services.AddHttpContextAccessor();
+var startup = new Startup(builder.Configuration);
+startup.ConfigureServices(builder.Services);
+startup.Configure(app, app.Environment);
+
+
+services.AddHttpContextAccessor();
 services.AddMemoryCache();
 
 service.AddTransient<IFileProvider, DatabaseFileProvider>(sp => {
