@@ -31,7 +31,7 @@ namespace CustomFileProviders.AppData
         {
             ViewEntity view = new ViewEntity();
 
-            view.Location = "/DbViews/Index";
+            view.Location = "/Views/DbViews/Index.cshtml";
             view.Content = "Welcome! @System.DateTime.Now";
             view.LastModified = DateTime.MinValue;
             view.LastRequested = DateTime.MinValue;
