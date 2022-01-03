@@ -8,6 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Services
 // 
 
+// https://stackoverflow.com/questions/48767910/entity-framework-core-a-second-operation-started-on-this-context-before-a-previ
+// https://mehdi.me/ambient-dbcontext-in-ef6/#:%7E:text=DbContext%20is%20not%20thread%2Dsafe,over%20the%20same%20database%20connection.&text=Any%20instance%20members%20are%20not%20guaranteed%20to%20be%20thread%20safe.
+// builder.Services.AddTransient<AppDbContext>();
+
 builder.Services.AddDbContext<AppDbContext>();
 
 IMvcBuilder mvcBuilder = builder.Services.AddControllersWithViews();

@@ -20,10 +20,13 @@ namespace CustomFileProviders.AppData
 
                 AppDbContext context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
-                if (context.Database.EnsureCreated()) await context.Database.MigrateAsync();
+                // if (context.Database.EnsureCreated()) await context.Database.MigrateAsync();
 
-                if (!context.DbViews.Any())
-                    PopulateSampleData(environment, context);
+                // context.Database.EnsureCreated(); // only created tables based on model
+
+                await context.Database.MigrateAsync(); // apply migrations to database
+
+                if (!context.DbViews.Any()) PopulateSampleData(environment, context);
             }
         }
 
